@@ -1,9 +1,21 @@
-version: '3.8'
-
 services:
-  postgres-db:
+  api:
+    build: ./backend
+    container_name: zettatask-api
+    ports:
+      - "3001:3001"
+    environment:
+      - DB_HOST=zettatask-db 
+      - DB_USER=docker
+      - DB_PASSWORD=docker
+      - DB_NAME=todo_api
+      - DB_DIALECT=postgres
+    depends_on:
+      - zettatask-db
+
+  zettatask-db: # Nome do serviço atualizado para corresponder ao DB_HOST
     image: postgres:13
-    container_name: postgres-todo-db
+    container_name: zettatask-db
     ports:
       - "5432:5432"
     environment:
