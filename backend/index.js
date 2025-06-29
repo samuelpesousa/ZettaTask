@@ -1,13 +1,16 @@
 // backend/index.js
 
 const express = require('express');
+const cors = require('cors'); // 1. Importe o pacote cors
 const userRoutes = require('./routes/userRoutes');
-const taskRoutes = require('./routes/taskRoutes'); // 1. Importe as rotas de tarefas
+const taskRoutes = require('./routes/taskRoutes');
 
 const app = express();
 const port = 3001;
 
+app.use(cors()); // 2. Diga ao Express para usar o cors
 app.use(express.json());
+
 
 // Rotas de Usuário
 app.use('/users', userRoutes);
