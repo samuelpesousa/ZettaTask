@@ -23,5 +23,7 @@ router.get('/', taskController.list);
 // Nova rota para atualizar uma tarefa específica
 router.put('/:id', taskController.update);
 
+// Nova rota para excluir uma tarefa específica
+router.delete('/:id', taskController.delete);
 
 module.exports = router;

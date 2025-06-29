@@ -73,3 +73,28 @@ exports.update = async (req, res) => {
     res.status(500).send({ message: 'Erro ao atualizar tarefa', error: error.message });
   }
 };
+
+// Nova função para excluir uma tarefa
+exports.delete = async (req, res) => {
+  try {
+    const { id } = req.params; // ID da tarefa vindo da URL
+    const UsuarioId = req.userId; // ID do usuário vindo do token
+
+    // O 'destroy' do Sequelize retorna o número de linhas deletadas.
+    const numLinhasDeletadas = await Tarefa.destroy({
+      // A cláusula 'where' garante que o usuário só delete sua própria tarefa.
+      where: { id, UsuarioId },
+    });
+
+    if (numLinhasDeletadas === 0) {
+      return res.status(404).send({ message: 'Tarefa não encontrada ou não pertence ao usuário.' });
+    }
+
+    // O padrão para uma resposta DELETE bem-sucedida é 204 No Content.
+    // Esta resposta não envia nenhum corpo.
+    res.status(204).send();
+
+  } catch (error) {
+    res.status(500).send({ message: 'Erro ao excluir tarefa', error: error.message });
+  }
+};
