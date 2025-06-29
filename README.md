@@ -53,8 +53,8 @@ O projeto consiste em uma API RESTful construída em Node.js para o backend e um
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/seu-usuario/seu-repositorio.git)
-    cd seu-repositorio
+    git clone [https://github.com/samuelpesousa/zettatask.git](https://github.com/samuelpesousa/zettatask.git)
+    cd zettatask
     ```
 
 2.  **Inicie o Backend e o Banco de Dados com Docker:**
@@ -130,4 +130,4 @@ Todas as rotas de tarefas (`/tasks`) são protegidas e exigem um token de autent
 * **Resposta (204 No Content)**: Resposta vazia indicando sucesso.
 
 ---
-*Desenvolvido por [Samuel Sousa]*
+*Desenvolvido por Samuel Sousa*
