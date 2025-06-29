@@ -1,36 +1,14 @@
-// frontend/src/components/TaskItem.jsx
 import React from 'react';
 
-function TaskItem({ task, onUpdateTask }) { // Adicionamos a prop onUpdateTask
-  // Objeto de estilo para ser mais fácil de ler
-  const styles = {
-    taskItem: {
-      border: '1px solid #ccc',
-      padding: '10px',
-      margin: '10px 0',
-      borderRadius: '5px',
-    },
-    taskHeader: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-    },
-    // Define a cor com base no status da tarefa
-    taskStatus: {
-      padding: '2px 8px',
-      borderRadius: '12px',
-      color: 'white',
-      backgroundColor: task.status === 'concluída' ? 'green' : 'orange',
-    },
-    button: {
-      marginLeft: '10px',
-      cursor: 'pointer',
-    }
-  };
+function TaskItem({ task, onUpdateTask, onDeleteTask }) { // Adicionamos a prop onDeleteTask
+  const styles = { /* ...código de estilos existente... */ };
+  // ... (código existente para styles e handleUpdateClick)
 
-  const handleUpdateClick = () => {
-    // Chama a função passada pelo componente pai
-    onUpdateTask(task.id, 'concluída');
+  const handleDeleteClick = () => {
+    // Pede confirmação ao usuário antes de excluir
+    if (window.confirm('Tem certeza que deseja excluir esta tarefa?')) {
+      onDeleteTask(task.id); // Chama a função passada pelo pai
+    }
   };
 
   return (
@@ -39,12 +17,15 @@ function TaskItem({ task, onUpdateTask }) { // Adicionamos a prop onUpdateTask
         <h3>{task.nome}</h3>
         <div>
           <span style={styles.taskStatus}>{task.status}</span>
-          {/* Mostra o botão apenas se a tarefa estiver pendente */}
           {task.status === 'pendente' && (
-            <button onClick={handleUpdateClick} style={styles.button}>
+            <button onClick={() => onUpdateTask(task.id, 'concluída')} style={styles.button}>
               Concluir
             </button>
           )}
+          {/* Botão de Excluir */}
+          <button onClick={handleDeleteClick} style={{...styles.button, backgroundColor: 'red', color: 'white'}}>
+            Excluir
+          </button>
         </div>
       </div>
       <p>{task.descricao}</p>
