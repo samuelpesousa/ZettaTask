@@ -1,7 +1,9 @@
+// frontend/src/components/TaskList.jsx
 import React from 'react';
 import TaskItem from './TaskItem';
 
-function TaskList({ tasks }) {
+// Aceita a nova prop onUpdateTask
+function TaskList({ tasks, onUpdateTask }) {
   if (tasks.length === 0) {
     return <p>Nenhuma tarefa encontrada.</p>;
   }
@@ -9,7 +11,11 @@ function TaskList({ tasks }) {
   return (
     <div>
       {tasks.map(task => (
-        <TaskItem key={task.id} task={task} />
+        <TaskItem 
+          key={task.id} 
+          task={task} 
+          onUpdateTask={onUpdateTask} // Passa a função para o TaskItem
+        />
       ))}
     </div>
   );
