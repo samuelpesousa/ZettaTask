@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
+import styles from './Auth.module.css';
 
 function LoginPage() {
   const [email, setEmail] = useState('');
@@ -34,9 +35,9 @@ function LoginPage() {
   };
 
   return (
-    <div>
+   <div className="container"> 
       <h1>ZettaTask - Acessar sua Conta</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.formContainer}>
         <div>
           <label>Email:</label>
           <input

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
+import styles from './Auth.module.css';
 
 function RegisterPage() {
   const [nome, setNome] = useState('');
@@ -25,9 +26,11 @@ function RegisterPage() {
   };
 
   return (
-    <div>
+    
+
+        <div className="container"> {/* Use a classe global */}
       <h1>ZettaTask - Crie sua Conta</h1>
-      <form onSubmit={handleSubmit}>
+      <form className={styles.formContainer} onSubmit={handleSubmit}>
         <div>
           <label>Nome:</label>
           <input

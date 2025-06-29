@@ -1,29 +1,36 @@
+// frontend/src/components/TaskItem.jsx
+
 import React from 'react';
+import styles from './Task.module.css'; // Importa os estilos do módulo CSS
 
-function TaskItem({ task, onUpdateTask, onDeleteTask }) { // Adicionamos a prop onDeleteTask
-  const styles = { /* ...código de estilos existente... */ };
-  // ... (código existente para styles e handleUpdateClick)
+function TaskItem({ task, onUpdateTask, onDeleteTask }) {
 
+  // Função chamada ao clicar no botão de excluir
   const handleDeleteClick = () => {
-    // Pede confirmação ao usuário antes de excluir
+    // Pede confirmação ao usuário antes de prosseguir
     if (window.confirm('Tem certeza que deseja excluir esta tarefa?')) {
-      onDeleteTask(task.id); // Chama a função passada pelo pai
+      onDeleteTask(task.id); // Chama a função passada pelo componente pai (DashboardPage)
     }
   };
 
   return (
-    <div style={styles.taskItem}>
-      <div style={styles.taskHeader}>
+    <div className={styles.taskItem}>
+      <div className={styles.taskHeader}>
         <h3>{task.nome}</h3>
-        <div>
-          <span style={styles.taskStatus}>{task.status}</span>
+        <div className={styles.taskActions}>
+          <span className={`${styles.taskStatus} ${task.status === 'concluída' ? styles.statusConcluida : styles.statusPendente}`}>
+            {task.status}
+          </span>
+          
+          {/* O botão "Concluir" só aparece se a tarefa estiver pendente */}
           {task.status === 'pendente' && (
-            <button onClick={() => onUpdateTask(task.id, 'concluída')} style={styles.button}>
+            <button onClick={() => onUpdateTask(task.id, 'concluída')}>
               Concluir
             </button>
           )}
-          {/* Botão de Excluir */}
-          <button onClick={handleDeleteClick} style={{...styles.button, backgroundColor: 'red', color: 'white'}}>
+
+          {/* Botão para excluir a tarefa */}
+          <button onClick={handleDeleteClick} className={styles.deleteButton}>
             Excluir
           </button>
         </div>

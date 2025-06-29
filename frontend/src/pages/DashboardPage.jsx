@@ -73,7 +73,7 @@ function DashboardPage() {
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
+    <div className="container" style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h1>ZettaTask - Seu Dashboard</h1>
         <button onClick={handleLogout}>Sair</button>
