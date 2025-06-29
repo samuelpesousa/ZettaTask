@@ -1,15 +1,14 @@
+// backend/routes/taskRoutes.js
+
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/authMiddleware');
+const taskController = require('../controllers/taskController'); // Importe o controller
 
-// Este middleware será aplicado a TODAS as rotas definidas neste arquivo
+// Aplica o middleware de autenticação a todas as rotas de tarefas
 router.use(authMiddleware);
 
 // Rota para criar uma nova tarefa
-router.post('/', (req, res) => {
-    // Acessamos o ID do usuário que foi anexado pelo middleware
-    res.send({ ok: true, user: req.userId });
-});
-
+router.post('/', taskController.create); // Use a função 'create' do controller
 
 module.exports = router;

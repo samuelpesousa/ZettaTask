@@ -26,6 +26,7 @@ exports.register = async (req, res) => {
     res.status(500).send({ message: 'Erro ao cadastrar usuário', error: error.message });
   }
 };
+// Substiua sua função de login por esta
 exports.login = async (req, res) => {
   try {
     const { email, senha } = req.body;
@@ -43,8 +44,7 @@ exports.login = async (req, res) => {
     }
 
     // 3. Gerar o token JWT
-    // O 'process.env.JWT_SECRET' é uma variável de ambiente que você deve criar para guardar seu segredo
-    // Por enquanto, vamos usar um segredo simples diretamente no código.
+    // Usando um segredo de texto simples para garantir que funcione
     const token = jwt.sign({ id: usuario.id }, 'seu_segredo_jwt_super_secreto', {
       expiresIn: '8h', // Token expira em 8 horas
     });
@@ -54,6 +54,8 @@ exports.login = async (req, res) => {
       token: token,
     });
   } catch (error) {
+    // Adicionamos um console.log para ver o erro no terminal
+    console.error('ERRO NO LOGIN:', error); 
     res.status(500).send({ message: 'Erro ao fazer login', error: error.message });
   }
 };
