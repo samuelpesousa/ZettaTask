@@ -1,10 +1,25 @@
-
+/* frontend/src/components/Task.module.css */
 .taskItem {
-  border: 1px solid #e0e0e0;
+  /* Fundo mais escuro, em harmonia com o container */
+  background-color: #2d2d2d;
+  border: 1px solid #444; /* Borda sutil */
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 5px;
-  background-color: #fff;
+
+  /* A borda colorida da esquerda */
+  border-left-width: 5px; 
+  transition: border-color 0.3s ease;
+}
+
+/* Modificador para a borda de tarefa pendente */
+.pendenteBorder {
+  border-left-color: #f39c12; /* Laranja */
+}
+
+/* Modificador para a borda de tarefa concluída */
+.concluidaBorder {
+  border-left-color: #2ecc71; /* Verde */
 }
 
 .taskHeader {
@@ -16,22 +31,7 @@
 
 .taskHeader h3 {
   margin: 0;
-}
-
-.taskStatus {
-  padding: 4px 10px;
-  border-radius: 12px;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.statusPendente {
-  background-color: #f39c12;
-}
-
-.statusConcluida {
-  background-color: #2ecc71;
+  font-weight: 500;
 }
 
 .taskActions button {
@@ -40,9 +40,34 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-weight: bold;
+  transition: opacity 0.2s;
+}
+
+.taskActions button:hover {
+  opacity: 0.8;
 }
 
 .deleteButton {
   background-color: #e74c3c;
   color: white;
+}
+
+/* O status agora não precisa de fundo, a borda já informa */
+.taskStatus {
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.statusPendente {
+  border-color: #f39c12;
+  color: #f39c12;
+}
+
+.statusConcluida {
+  border-color: #2ecc71;
+  color: #2ecc71;
 }

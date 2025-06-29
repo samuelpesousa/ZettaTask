@@ -6,15 +6,37 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f4f7f9;
-  color: #333;
+  background-color: #1e1e1e; /* Dark background */
+  color: #d4d4d4; /* Light text */
 }
 
 .container {
   max-width: 800px;
   margin: 40px auto;
-  padding: 20px;
-  background-color: #fff;
+  padding: 30px; /* Increased padding */
+  background-color: #252525; /* Darker container */
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Darker shadow */
+}
+
+h1, h2, h3, p, label {
+  color: #d4d4d4;
+}
+
+hr {
+  border-top: 1px solid #444;
+  margin: 20px 0;
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  opacity: 0.8;
 }

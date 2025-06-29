@@ -29,7 +29,7 @@ function RegisterPage() {
     
 
         <div className="container"> {/* Use a classe global */}
-      <h1>ZettaTask - Crie sua Conta</h1>
+<h1><span style={{ color: '#007bff' }}>Zetta</span>Task - Criar Conta</h1>
       <form className={styles.formContainer} onSubmit={handleSubmit}>
         <div>
           <label>Nome:</label>

@@ -1,35 +1,35 @@
 // frontend/src/components/TaskItem.jsx
 
 import React from 'react';
-import styles from './Task.module.css'; // Importa os estilos do módulo CSS
+import styles from './Task.module.css';
 
 function TaskItem({ task, onUpdateTask, onDeleteTask }) {
 
-  // Função chamada ao clicar no botão de excluir
   const handleDeleteClick = () => {
-    // Pede confirmação ao usuário antes de prosseguir
     if (window.confirm('Tem certeza que deseja excluir esta tarefa?')) {
-      onDeleteTask(task.id); // Chama a função passada pelo componente pai (DashboardPage)
+      onDeleteTask(task.id);
     }
   };
 
+  // Define as classes dinamicamente com base no status
+  const taskItemClasses = `${styles.taskItem} ${task.status === 'concluída' ? styles.concluidaBorder : styles.pendenteBorder}`;
+  const statusClasses = `${styles.taskStatus} ${task.status === 'concluída' ? styles.statusConcluida : styles.statusPendente}`;
+
   return (
-    <div className={styles.taskItem}>
+    <div className={taskItemClasses}>
       <div className={styles.taskHeader}>
         <h3>{task.nome}</h3>
         <div className={styles.taskActions}>
-          <span className={`${styles.taskStatus} ${task.status === 'concluída' ? styles.statusConcluida : styles.statusPendente}`}>
+          <span className={statusClasses}>
             {task.status}
           </span>
-          
-          {/* O botão "Concluir" só aparece se a tarefa estiver pendente */}
+
           {task.status === 'pendente' && (
             <button onClick={() => onUpdateTask(task.id, 'concluída')}>
               Concluir
             </button>
           )}
 
-          {/* Botão para excluir a tarefa */}
           <button onClick={handleDeleteClick} className={styles.deleteButton}>
             Excluir
           </button>
