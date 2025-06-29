@@ -5,27 +5,27 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-[cite_start]Aplicação Full-Stack de um sistema de gerenciamento de tarefas ("to-do list"), desenvolvida como solução para o **Desafio II - Desenvolvimento de Software** do Zetta Lab 2025[cite: 1].
+Aplicação Full-Stack de um sistema de gerenciamento de tarefas ("to-do list"), desenvolvida como solução para o **Desafio II - Desenvolvimento de Software** do Zetta Lab 2025.
 
 O projeto consiste em uma API RESTful construída em Node.js para o backend e uma interface interativa em React para o frontend, com todo o ambiente de backend sendo executado em contêineres Docker.
 
 ## Funcionalidades Implementadas
 
-* [cite_start]✅ **Autenticação de Usuários**: Sistema completo de cadastro e login com tokens JWT[cite: 3, 8].
-* [cite_start]✅ **Gerenciamento de Tarefas (CRUD)**: Usuários autenticados podem criar, listar, atualizar e excluir suas próprias tarefas[cite: 3].
-* [cite_start]✅ **Filtro de Tarefas**: A listagem de tarefas permite a filtragem por status (`pendente` ou `concluída`)[cite: 4].
+* ✅ **Autenticação de Usuários**: Sistema completo de cadastro e login com tokens JWT.
+* ✅ **Gerenciamento de Tarefas (CRUD)**: Usuários autenticados podem criar, listar, atualizar e excluir suas próprias tarefas.
+* ✅ **Filtro de Tarefas**: A listagem de tarefas permite a filtragem por status (`pendente` ou `concluída`).
 * ✅ **Rotas Protegidas**: As rotas de tarefas são protegidas por um middleware de autenticação, garantindo que um usuário não possa acessar ou modificar as tarefas de outro.
 * ✅ **Interface Reativa**: O frontend, construído em React, reflete todas as alterações em tempo real, sem a necessidade de recarregar a página.
-* [cite_start]✅ **Ambiente Dockerizado**: A API e o banco de dados rodam em contêineres Docker, garantindo um ambiente de execução consistente e de fácil configuração[cite: 9].
+* ✅ **Ambiente Dockerizado**: A API e o banco de dados rodam em contêineres Docker, garantindo um ambiente de execução consistente e de fácil configuração.
 
 ## Stack de Tecnologias
 
 #### **Backend**
 * **Node.js**: Ambiente de execução JavaScript.
-* [cite_start]**Express**: Framework web para a construção da API RESTful[cite: 6].
-* [cite_start]**PostgreSQL**: Banco de dados relacional para persistência de dados[cite: 7].
-* [cite_start]**Sequelize**: ORM para a interação com o banco de dados[cite: 7].
-* [cite_start]**JSON Web Token (JWT)**: Para a geração de tokens de autenticação[cite: 8].
+* **Express**: Framework web para a construção da API RESTful.
+* **PostgreSQL**: Banco de dados relacional para persistência de dados.
+* **Sequelize**: ORM para a interação com o banco de dados.
+* **JSON Web Token (JWT)**: Para a geração de tokens de autenticação.
 * **Bcrypt.js**: Para a criptografia de senhas.
 * **CORS**: Para permitir a comunicação entre o frontend e o backend.
 
@@ -37,8 +37,8 @@ O projeto consiste em uma API RESTful construída em Node.js para o backend e um
 * **CSS Modules**: Para a estilização dos componentes.
 
 #### **Infraestrutura**
-* [cite_start]**Docker & Docker Compose**: Para a containerização e orquestração do ambiente de backend[cite: 9].
-* [cite_start]**Git & GitHub**: Para o versionamento e hospedagem do código-fonte[cite: 11].
+* **Docker & Docker Compose**: Para a containerização e orquestração do ambiente de backend.
+* **Git & GitHub**: Para o versionamento e hospedagem do código-fonte.
 
 ## Como Executar o Projeto
 
@@ -62,7 +62,6 @@ O projeto consiste em uma API RESTful construída em Node.js para o backend e um
     ```bash
     docker-compose up --build
     ```
-    *Em uma primeira execução, o banco de dados pode iniciar mais rápido que a API. Se a API mostrar um erro de conexão, aguarde alguns segundos e reinicie com `Ctrl+C` e `docker-compose up` novamente.*
 
 3.  **Execute as Migrations do Banco de Dados:**
     Com o ambiente rodando, abra **um novo terminal** e execute o comando abaixo para criar as tabelas no banco de dados.
