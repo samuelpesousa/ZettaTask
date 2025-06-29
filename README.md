@@ -1,140 +1,134 @@
-# Projeto ZettaTask To-Do List API
+# ZettaTask - Gerenciador de Tarefas
 
-API RESTful para um sistema de gerenciamento de tarefas (to-do list), permitindo que usuários se cadastrem, autentiquem e gerenciem suas tarefas. Este projeto foi desenvolvido como parte do Desafio II do Zetta Lab 2025.
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 
-## Tecnologias Utilizadas
+[cite_start]Aplicação Full-Stack de um sistema de gerenciamento de tarefas ("to-do list"), desenvolvida como solução para o **Desafio II - Desenvolvimento de Software** do Zetta Lab 2025[cite: 1].
 
-* [cite_start]**Backend:** Node.js [cite: 1, 9]
-* [cite_start]**Framework:** Express [cite: 1, 9]
-* [cite_start]**Banco de Dados:** PostgreSQL [cite: 1, 10]
-* **ORM:** Sequelize
-* [cite_start]**Autenticação:** JSON Web Token (JWT) [cite: 2, 11]
-* [cite_start]**Containerização:** Docker [cite: 1, 12]
+O projeto consiste em uma API RESTful construída em Node.js para o backend e uma interface interativa em React para o frontend, com todo o ambiente de backend sendo executado em contêineres Docker.
 
-## [cite_start]Modelo de Entidade e Relacionamento (ERD) [cite: 14]
+## Funcionalidades Implementadas
 
-O sistema possui duas entidades principais: `Usuario` e `Tarefa`.
+* [cite_start]✅ **Autenticação de Usuários**: Sistema completo de cadastro e login com tokens JWT[cite: 3, 8].
+* [cite_start]✅ **Gerenciamento de Tarefas (CRUD)**: Usuários autenticados podem criar, listar, atualizar e excluir suas próprias tarefas[cite: 3].
+* [cite_start]✅ **Filtro de Tarefas**: A listagem de tarefas permite a filtragem por status (`pendente` ou `concluída`)[cite: 4].
+* ✅ **Rotas Protegidas**: As rotas de tarefas são protegidas por um middleware de autenticação, garantindo que um usuário não possa acessar ou modificar as tarefas de outro.
+* ✅ **Interface Reativa**: O frontend, construído em React, reflete todas as alterações em tempo real, sem a necessidade de recarregar a página.
+* [cite_start]✅ **Ambiente Dockerizado**: A API e o banco de dados rodam em contêineres Docker, garantindo um ambiente de execução consistente e de fácil configuração[cite: 9].
 
-* **Usuario**: Armazena os dados dos usuários.
-    * `id` (Chave Primária)
-    * `nome`
-    * `email`
-    * `senha` (armazenada com hash)
-* **Tarefa**: Armazena as tarefas criadas.
-    * `id` (Chave Primária)
-    * `nome`
-    * `descricao`
-    * `status`
-    * `UsuarioId` (Chave Estrangeira para `Usuario`)
+## Stack de Tecnologias
 
-**Relacionamento:** Um `Usuario` pode ter várias (`N`) `Tarefas`, mas uma `Tarefa` pertence a apenas um (`1`) `Usuario`. (Relacionamento 1:N)
+#### **Backend**
+* **Node.js**: Ambiente de execução JavaScript.
+* [cite_start]**Express**: Framework web para a construção da API RESTful[cite: 6].
+* [cite_start]**PostgreSQL**: Banco de dados relacional para persistência de dados[cite: 7].
+* [cite_start]**Sequelize**: ORM para a interação com o banco de dados[cite: 7].
+* [cite_start]**JSON Web Token (JWT)**: Para a geração de tokens de autenticação[cite: 8].
+* **Bcrypt.js**: Para a criptografia de senhas.
+* **CORS**: Para permitir a comunicação entre o frontend e o backend.
+
+#### **Frontend**
+* **React**: Biblioteca para a construção da interface de usuário.
+* **Vite**: Ferramenta de build e servidor de desenvolvimento.
+* **React Router DOM**: Para o gerenciamento de rotas e navegação.
+* **Axios**: Cliente HTTP para a comunicação com a API.
+* **CSS Modules**: Para a estilização dos componentes.
+
+#### **Infraestrutura**
+* [cite_start]**Docker & Docker Compose**: Para a containerização e orquestração do ambiente de backend[cite: 9].
+* [cite_start]**Git & GitHub**: Para o versionamento e hospedagem do código-fonte[cite: 11].
 
 ## Como Executar o Projeto
 
-1.  **Clone o repositório.**
-2.  **Inicie o banco de dados com Docker:**
+**Pré-requisitos:**
+* Node.js (v18 ou superior)
+* NPM
+* Docker
+* Docker Compose
+* Git
+
+**Passo a passo:**
+
+1.  **Clone o repositório:**
     ```bash
-    docker-compose up -d
+    git clone [https://github.com/seu-usuario/seu-repositorio.git](https://github.com/seu-usuario/seu-repositorio.git)
+    cd seu-repositorio
     ```
-3.  **Navegue até a pasta do backend:**
+
+2.  **Inicie o Backend e o Banco de Dados com Docker:**
+    Este comando irá construir a imagem da API e iniciar os contêineres.
     ```bash
-    cd backend
+    docker-compose up --build
     ```
-4.  **Instale as dependências:**
+    *Em uma primeira execução, o banco de dados pode iniciar mais rápido que a API. Se a API mostrar um erro de conexão, aguarde alguns segundos e reinicie com `Ctrl+C` e `docker-compose up` novamente.*
+
+3.  **Execute as Migrations do Banco de Dados:**
+    Com o ambiente rodando, abra **um novo terminal** e execute o comando abaixo para criar as tabelas no banco de dados.
     ```bash
+    docker-compose exec api npx sequelize-cli db:migrate
+    ```
+
+4.  **Inicie o Frontend:**
+    No mesmo novo terminal, navegue até a pasta do frontend, instale as dependências e inicie o servidor de desenvolvimento.
+    ```bash
+    cd frontend
     npm install
+    npm run dev
     ```
-5.  **Execute as migrations do banco de dados:**
-    ```bash
-    npx sequelize-cli db:migrate
-    ```
-6.  **Inicie o servidor:**
-    ```bash
-    node index.js
-    ```
-O servidor estará rodando em `http://localhost:3001`.
+
+5.  **Acesse a Aplicação:**
+    Abra seu navegador e acesse [`http://localhost:5173`](http://localhost:5173) (ou a porta indicada pelo Vite).
 
 ## Documentação da API
 
+Todas as rotas de tarefas (`/tasks`) são protegidas e exigem um token de autenticação no cabeçalho `Authorization: Bearer <seu_token>`.
+
 ### Módulo de Autenticação
 
-#### 1. Cadastrar um novo usuário
-* **Método:** `POST`
-* **Endpoint:** `/users/register`
-* **Corpo da Requisição (JSON):**
+#### `POST /users/register`
+* **Descrição**: Cadastra um novo usuário.
+* **Corpo (Body)**:
     ```json
-    {
-        "nome": "Seu Nome",
-        "email": "email@exemplo.com",
-        "senha": "sua_senha"
-    }
+    { "nome": "string", "email": "string", "senha": "string" }
     ```
-* **Resposta de Sucesso (201 Created):**
-    ```json
-    {
-        "message": "Usuário cadastrado com sucesso!",
-        "usuario": {
-            "id": 1,
-            "nome": "Seu Nome",
-            "email": "email@exemplo.com"
-        }
-    }
-    ```
+* **Resposta (201 Created)**: Objeto com `message` e dados do `usuario` (sem a senha).
 
-#### 2. Autenticar um usuário
-* **Método:** `POST`
-* **Endpoint:** `/users/login`
-* **Corpo da Requisição (JSON):**
+#### `POST /users/login`
+* **Descrição**: Autentica um usuário existente.
+* **Corpo (Body)**:
     ```json
-    {
-        "email": "email@exemplo.com",
-        "senha": "sua_senha"
-    }
+    { "email": "string", "senha": "string" }
     ```
-* **Resposta de Sucesso (200 OK):**
-    ```json
-    {
-        "message": "Login realizado com sucesso!",
-        "token": "seu_token_jwt_aqui"
-    }
-    ```
+* **Resposta (200 OK)**: Objeto com `message` e o `token` JWT.
 
 ### Módulo de Tarefas
 
-**Atenção:** Todas as rotas de tarefas são protegidas e exigem um token de autenticação. Envie o token no cabeçalho `Authorization` como `Bearer seu_token_jwt_aqui`.
-
-#### 1. Criar uma nova tarefa
-* **Método:** `POST`
-* **Endpoint:** `/tasks`
-* **Corpo da Requisição (JSON):**
+#### `POST /tasks`
+* **Descrição**: Cria uma nova tarefa para o usuário autenticado.
+* **Corpo (Body)**:
     ```json
-    {
-        "nome": "Nome da Tarefa",
-        "descricao": "Descrição detalhada da tarefa."
-    }
+    { "nome": "string", "descricao": "string" }
     ```
-* **Resposta de Sucesso (201 Created):** Retorna o objeto da tarefa criada.
+* **Resposta (201 Created)**: Objeto da tarefa recém-criada.
 
-#### 2. Listar tarefas do usuário
-* **Método:** `GET`
-* **Endpoint:** `/tasks`
-* [cite_start]**Filtro (Opcional):** Você pode filtrar por status adicionando `?status=pendente` ou `?status=concluída` ao final da URL. [cite: 2, 7]
-* **Resposta de Sucesso (200 OK):** Retorna um array com as tarefas do usuário.
+#### `GET /tasks`
+* **Descrição**: Lista todas as tarefas do usuário autenticado.
+* **Filtro (Query Param)**: `?status=pendente` ou `?status=concluída` para filtrar a lista.
+* **Resposta (200 OK)**: Um array de objetos de tarefa.
 
-#### 3. Atualizar uma tarefa
-* **Método:** `PUT`
-* **Endpoint:** `/tasks/:id` (substitua `:id` pelo ID da tarefa)
-* **Corpo da Requisição (JSON):**
+#### `PUT /tasks/:id`
+* **Descrição**: Atualiza uma tarefa existente do usuário.
+* **Corpo (Body)**:
     ```json
-    {
-        "nome": "Novo Nome da Tarefa",
-        "descricao": "Nova descrição da tarefa.",
-        "status": "concluída"
-    }
+    { "nome": "string", "descricao": "string", "status": "string" }
     ```
-* **Resposta de Sucesso (200 OK):** Retorna o objeto da tarefa atualizada.
+* **Resposta (200 OK)**: Objeto da tarefa atualizada.
 
-#### 4. Excluir uma tarefa
-* **Método:** `DELETE`
-* **Endpoint:** `/tasks/:id` (substitua `:id` pelo ID da tarefa)
-* **Resposta de Sucesso (204 No Content):** Resposta sem corpo, indicando sucesso.
+#### `DELETE /tasks/:id`
+* **Descrição**: Exclui uma tarefa existente do usuário.
+* **Resposta (204 No Content)**: Resposta vazia indicando sucesso.
+
+---
+*Desenvolvido por [Samuel Sousa]*
